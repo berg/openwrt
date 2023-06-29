@@ -145,6 +145,25 @@ define Device/edgecore_ecw5410
 endef
 TARGET_DEVICES += edgecore_ecw5410
 
+define Device/extreme_ap3935
+	$(call Device/LegacyImage)
+	$(call Device/UbiFit)
+	DEVICE_VENDOR := Extreme Networks
+	DEVICE_MODEL := AP3935
+	SOC := qcom-ipq8068
+	PAGESIZE := 2048
+	BLOCKSIZE := 128k
+	KERNEL = kernel-bin | append-dtb | uImage none | append-uImage-fakehdr filesystem
+	KERNEL_LOADADDR = 0x41408000
+	KERNEL_SIZE := 14400k
+	KERNEL_SUFFIX := -uImage
+	UBINIZE_OPTS := -E 5
+	DEVICE_PACKAGES := ath10k-firmware-qca99x0-ct \
+		ath10k-board-qca99x0-2g-high ath10k-board-qca99x0-5g-high \
+		tcpdump iperf3 luci openssh-client openssh-client-utils openssh-keygen
+endef
+TARGET_DEVICES += extreme_ap3935
+
 define Device/linksys_ea7500-v1
 	$(call Device/LegacyImage)
 	$(Device/kernel-size-migration)

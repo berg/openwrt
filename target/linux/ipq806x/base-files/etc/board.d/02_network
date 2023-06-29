@@ -31,7 +31,8 @@ ipq806x_setup_interfaces()
 		ucidef_add_switch "switch0" \
 			"1:lan" "2:lan" "3:lan" "4:lan" "6@eth1" "5:wan" "0@eth0"
 		;;
-	edgecore,ecw5410)
+	edgecore,ecw5410 |\
+	extreme,ap3935)
 		ucidef_set_interfaces_lan_wan "eth1" "eth0"
 		;;
 	linksys,ea7500-v1)
@@ -103,6 +104,9 @@ ipq806x_setup_mac_address()
 		hw_mac_addr=$(mtd_get_mac_ascii devinfo hw_mac_addr)
 		ucidef_set_interface_macaddr "lan" "$hw_mac_addr"
 		ucidef_set_interface_macaddr "wan" "$hw_mac_addr"
+		;;
+	extreme,ap3935)
+		ucidef_set_interface_macaddr "wan" "$(mtd_get_mac_ascii CFG1 eth1addr)"
 		;;
 	linksys,ea8500)
 		hw_mac_addr=$(mtd_get_mac_ascii devinfo hw_mac_addr)
