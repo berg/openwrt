@@ -105,9 +105,6 @@ ipq806x_setup_mac_address()
 		ucidef_set_interface_macaddr "lan" "$hw_mac_addr"
 		ucidef_set_interface_macaddr "wan" "$hw_mac_addr"
 		;;
-	extreme,ap3935)
-		ucidef_set_interface_macaddr "wan" "$(mtd_get_mac_ascii CFG1 eth1addr)"
-		;;
 	linksys,ea8500)
 		hw_mac_addr=$(mtd_get_mac_ascii devinfo hw_mac_addr)
 		ucidef_set_interface_macaddr "lan" "$hw_mac_addr"
